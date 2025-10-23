@@ -1,0 +1,73 @@
+Repeating GCD
+Question Link:https://www.geeksforgeeks.org/problems/repeating-gcd4659/1
+Problem Statement :
+Given three integers N, x and y, a number A is formed by repeating N x times and another number B is formed by repeating N y times. You need to find the GCD(A,B).
+
+Examples:
+Example 1:
+Input: N = 1, x = 1, y = 1
+Output: 1
+Explanation: A = 1, B = 1, GCD(1, 1)  = 1
+
+Example 2:
+Input: N = 2, x = 2, y = 2
+Output: 2
+Explanation: A = 22, B = 222, GCD(22, 222) = 2
+
+Constraints:
+1 <= x, y <= 100000
+*1 <= N <= 10^18
+
+👉Naive approach :-
+   Pseudocode:-.
+Create two strings A and B by repeating the number x and y N times, respectively.
+Convert strings A and B into integers.
+Find the GCD of the integers A and B.
+Repeat x N times to form string A.
+Repeat y N times to form string B.
+Convert string A to integer a.
+Convert string B to integer b.
+Find the GCD of a and b.
+ 
+👉Optimal Approach:-
+   Pseudocode:
+   Directly find the GCD of x and y without forming the strings A and B explicitly.
+
+Define a function to calculate the GCD of two numbers.
+Inside the function, if one of the numbers is zero, return the other number as the GCD.
+Otherwise, recursively call the function with the smaller number and the remainder of the division of the larger number by the smaller number.
+Return the result of the recursive call.
+Call the GCD function with numbers x and y.
+ 
+
+**// Naive approach**
+
+class Solution:
+    def gcd(self, a: int, b: int) -> int:
+        if b == 0:
+            return a
+        return self.gcd(b, a % b)
+    
+    def repeatedGcd(self, N: int, x: int, y: int) -> int:
+        a = int(str(x) * N)
+        b = int(str(y) * N)
+        return self.gcd(a, b)
+
+**# Optimal Approach**
+
+class Solution:
+    def gcd(self, a: int, b: int) -> int:
+        if b == 0:
+            return a
+        return self.gcd(b, a % b)
+    
+    def repeatedGcd(self, N: int, x: int, y: int) -> int:
+        return self.gcd(x, y)
+
+
+👉 Time complexity:-
+The time complexity of the optimal approach isO(N), where Nis the given number. This is because we iterate up to N to find all the factors.
+The time complexity of the optimal approach for finding the GCD of two numbers x and y is (log⁡(min⁡(x.y))) O (log(min(x,y))), where log⁡(min⁡(x,y)) log(min(x,y)) represents the number of digits in the smaller number.
+
+👉 Space complexity:
+The space complexity of the optimal approach is O (1) since it does not require any additional space apart from the input parameters and variables used for computation
