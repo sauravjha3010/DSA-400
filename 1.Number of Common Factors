@@ -60,3 +60,12 @@ def count_divisors(n):
             else:
                 count += 2
     return count
+
+👉 Time complexity:-
+The time complexity of the optimal approach is O(9 * 2^n) because we are trying all possible combinations of digits 
+for each position in the number, where n is the length of the number
+ 
+
+👉 Space complexity:-
+The space complexity is O(2^n) because we are storing all the generated numbers in the result list, which could 
+potentially contain up to 2^n numbers, where n is the length of the number.
