@@ -1,0 +1,73 @@
+Product of factors of number
+Question Link:https://www.geeksforgeeks.org/problems/product-of-factors-of-number4757/1?utm_source=geeksforgeeks&utm_medium=article_practice_tab&utm_campaign=article_practice_tab
+Problem Statement :
+Given a number N. Calculate the product of all factors of N. Since Answer can be very large,compute the answer modulo 10^9+7.
+ 
+Examples:
+Example 1:
+Input:
+N=6
+Output:
+36
+Explanation:
+Factors of 6 are 1,2,3,6.Their product is (1*2*3*6)%(109+7)=36.
+
+Example 2:
+Input:
+N=25
+Output:
+125
+Explanation:
+The factors of 25 are 1,5 and 25.
+So, Their product is (1*5*25)%(109+7) = 125.
+
+Constraints:
+Expected Time Complexity: O(Sqrt(N))
+Expected Auxillary Space: O(1)
+
+👉Naive approach :-
+   Pseudocode:-
+Initialize a variable product to 1.
+Iterate from 1 to N, checking if each number is a factor of N.
+If a number is a factor, multiply it with the product.
+After iterating through all numbers, return the product modulo 10^9 + 7.
+  
+👉Optimal Approach:-
+ Pseudocode:
+Factorize the number N into prime factors.
+Calculate the product of each prime factor raised to its corresponding exponent.
+Return the product modulo 10^9 + 7.
+
+**// Naive approach**
+
+class Solution:
+    def factorProduct(self, N: int) -> int:
+        product = 1
+        mod = 1000000007
+
+        for i in range(1, int(N**0.5) + 1):
+            if N % i == 0:
+                if N // i == i:
+                    product = (product * i) % mod
+                else:
+                    product = (product * i * (N // i)) % mod
+
+        return product
+
+sol = Solution()
+print(sol.factorProduct(12))
+
+**# Optimal Approach**
+
+class Solution:
+    def add(self, num1: int, num2: int) -> int:
+        if num2 == 0:
+            return num1
+        return self.add(num1 ^ num2, (num1 & num2) << 1)
+
+👉 Time complexity:-
+The time complexity of the optimal approach is O(N), where Nis the given number. This is because we iterate up to N to find all the factors.
+
+
+👉 Space complexity:
+The space complexity is O(1) as we only use a constant amount of extra space regardless of the input size.
