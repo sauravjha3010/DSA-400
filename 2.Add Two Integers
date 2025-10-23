@@ -1,3 +1,61 @@
+Add Two Integer
+Question Link:https://leetcode.com/problems/add-two-integers/
+Problem Statement :
+Given two integers num1 and num2, return the sum of the two integers.
+
+Examples:
+Example 1:
+Input: num1 = 12, num2 = 5
+Output: 17  
+Explanation: num1 is 12, num2 is 5, and their sum is 12 + 5 = 17, so 17 is returned.
+
+Example 2:
+Input: num1 = -10, num2 = 4
+Output: -6
+Explanation: num1 + num2 = -6, so -6 is returned.
+Constraints: 
+-100 <= num1, num2 <= 100
+
+👉Naive approach :-
+   Pseudocode:-
+Input: Two integers num1 and num2.
+Output: Sum of the two integers.
+Initialize a loop that continues until num2 becomes zero.
+Within the loop:
+Calculate the carry by performing bitwise AND operation between num1 and num2.
+Update num1 by performing bitwise XOR operation between num1 and num2.
+Update num2 by shifting the carry one position to the left.
+Return num1 as the sum.
+
+👉Optimal Approach:-
+   Pseudocode:
+Input: Two integers num1 and num2.
+Output: Sum of the two integers.
+Check if num2 is equal to zero.
+If num2 is zero, return num1.
+Recursively call the add function with arguments:
+num1 ^ num2 (bitwise XOR of num1 and num2), which calculates the sum without considering the carry.
+(num1 &num2) <<1 (bitwise AND of num1 and num2, shifted one position to the left), which calculates the carry.
+Return the result of the recursive call as the sum.
+
+**// Naive approach**
 class Solution:
-    def sum(self, num1: int, num2: int) -> int:
-        return num1+num2
+    def add(self, num1: int, num2: int) -> int:
+        while num2:
+            carry = num1 & num2
+            num1 ^= num2
+            num2 = carry << 1
+        return num1
+
+**# Optimal Approach**
+class Solution:
+    def add(self, num1: int, num2: int) -> int:
+        if num2 == 0:
+            return num1
+        return self.add(num1 ^ num2, (num1 & num2) << 1)
+
+👉 Time complexity:-
+In the naive approach, the time complexity is logarithmic in the maximum of the two input integers, as the number of iterations depends on the number of bits in the larger integer.
+In the optimal approach, both the time and space complexities are constant, as the addition operation is performed using bitwise operations without any loops or recursion.
+👉 Space complexity:-
+The space complexity remains constant as only a fixed amount of memory is used, so O(1)
